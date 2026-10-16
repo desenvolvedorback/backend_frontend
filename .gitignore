@@ -3,3 +3,5 @@ node_modules/
 **/node_modules
 /cadastro_frontend/backend/node_modules/.
 /cadastro_frontend/backend/node_modules
+/cadastro_frontend/backend/.env
+.env
