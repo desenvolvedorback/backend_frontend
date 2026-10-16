@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Pessoas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastro de Pessoas</h1>
+
+    <!-- Formulário Dinâmico: Cadastro e Edição -->
+    <form id="formPessoa" class="card">
+      <input type="hidden" id="pessoaId">
+
+      <div class="campo">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" required placeholder="Ex: Edson Silva">
+      </div>
+
+      <div class="campo">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" required placeholder="Ex: edson@exemplo.com">
+      </div>
+
+      <div class="campo">
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" placeholder="(14) 99999-0000">
+      </div>
+
+      <div class="botoes-form">
+        <button type="submit" id="btnSalvar">Cadastrar</button>
+        <button type="button" id="btnCancelar" class="btn-secundario" style="display: none;">Cancelar</button>
+      </div>
+    </form>
+
+    <!-- Feedback visual -->
+    <div id="statusMensagem" class="status-alerta"></div>
+
+    <!-- Tabela de Listagem -->
+    <div class="card">
+      <h2>Pessoas Cadastradas</h2>
+      <table class="tabela-pessoas">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaCorpo"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Axios via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Lógica da Aplicação -->
+  <script src="app.js"></script>
+</body>
+</html>
