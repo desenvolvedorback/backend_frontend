@@ -142,3 +142,6 @@ O frontend está configurado para acessar a API em http://localhost:3000/api. Se
 - Para um sistema real, implemente autenticação, autorização, validação completa dos dados e tratamento adequado de erros.
 
 Projeto de estudo — Ligação do backend com o frontend.
+
+
+> ## .ENV enviado para o desenvolvimento e testes locais
