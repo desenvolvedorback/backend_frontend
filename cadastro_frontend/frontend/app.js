@@ -75,7 +75,7 @@ formPessoa.addEventListener('submit', async (e) => {
   }
 });
 
-// 3. PATCH: Soft Delete
+// 3. PATCH: Soft Delete - Desativando uma pessoa
 window.desativarPessoa = async function(id) {
   if (!confirm('Deseja realmente desativar este cadastro?')) return;
 

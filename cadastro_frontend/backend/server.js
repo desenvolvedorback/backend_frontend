@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors'); // permite o envio de informações de diferentes servidorres (frontend e backend)
 const db = require('./db');
 
 const app = express();
@@ -75,5 +75,12 @@ app.patch('/api/pessoas/:id/desativar', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
+  console.log(`
+████  █   █    ████   ███  █   █ ███    █     █████  ███  █   █  ███  ████  ████   ███  
+█   █  █ █     █   █ █   █ █   █  █     █     █     █   █ ██  █ █   █ █   █ █   █ █   █ 
+████    █      █   █ █████ █   █  █     █     ████  █   █ █ █ █ █████ ████  █   █ █   █ 
+█   █   █      █   █ █   █  █ █   █     █     █     █   █ █  ██ █   █ █  █  █   █ █   █ 
+████    █      ████  █   █   █   ███    █████ █████  ███  █   █ █   █ █   █ ████   ███  
+    `)
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
