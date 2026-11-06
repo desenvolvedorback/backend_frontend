@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Atividade Prática: Sistema de Controle de Estoque de Produtos</h1>
+
+<h2>1. Contexto do Desafio</h2>
+<p>Nesta atividade prática, você irá replicar e adaptar a arquitetura de uma aplicação web completa, desenvolvendo um sistema de <strong>Cadastro e Controle de Estoque de Produtos</strong>. A aplicação integrará:</p>
+<ul>
+  <li><strong>Frontend:</strong> HTML5, CSS3 e JavaScript consumindo a API com <strong>Axios via CDN</strong>.</li>
+  <li><strong>Backend:</strong> Node.js com Express, modularizado e com credenciais protegidas via <strong>dotenv</strong>.</li>
+  <li><strong>Banco de Dados:</strong> MySQL (criado via <strong>MySQL Workbench</strong>) com suporte a <em>Soft Delete</em> (exclusão lógica).</li>
+</ul>
+
+<hr>
+
+<h2>2. Objetivos de Aprendizagem</h2>
+<ul>
+  <li>Construir a modelagem de dados no MySQL com campos numéricos inteiros, decimais e booleanos.</li>
+  <li>Centralizar a conexão do banco de dados em um módulo isolado e utilizar variáveis de ambiente.</li>
+  <li>Implementar rotas HTTP RESTful (GET, POST, PUT e PATCH) com tratamento de exceções e códigos de status HTTP apropriados.</li>
+  <li>Consumir endpoints no frontend com Axios utilizando a sintaxe <code>async/await</code> e manipulação dinâmica do DOM.</li>
+</ul>
+
+<hr>
+
+<h2>3. Especificação do Banco de Dados (MySQL Workbench)</h2>
+<p>No MySQL Workbench, crie a base de dados <code>app_estoque</code> e a tabela <code>produtos</code> conforme as definições abaixo:</p>
+<ul>
+  <li><strong>id:</strong> INT, AUTO_INCREMENT, Chave Primária</li>
+  <li><strong>nome:</strong> VARCHAR(100), Obrigatório (NOT NULL)</li>
+  <li><strong>descricao:</strong> TEXT, Opcional (NULL)</li>
+  <li><strong>quantidade:</strong> INT, Obrigatório, Padrão 0</li>
+  <li><strong>preco:</strong> DECIMAL(10,2), Obrigatório</li>
+  <li><strong>ativo:</strong> BOOLEAN, Padrão TRUE (1)</li>
+  <li><strong>criado_em:</strong> TIMESTAMP, Padrão CURRENT_TIMESTAMP</li>
+</ul>
+
+<hr>
+
+<h2>4. Especificação do Backend (Node.js + Express)</h2>
+<p>Organize a pasta <code>backend/</code> com a seguinte estrutura:</p>
+<ul>
+  <li><code>.env</code>: Contendo <code>PORT=3000</code>, <code>DB_HOST=localhost</code>, <code>DB_USER=root</code>, <code>DB_PASSWORD=suasenha</code> e <code>DB_NAME=app_estoque</code>.</li>
+  <li><code>db.js</code>: Arquivo isolado que cria e exporta o pool de conexões (<code>mysql2/promise</code>).</li>
+  <li><code>server.js</code>: Servidor Express com CORS, JSON middleware e as rotasda API.</li>
+</ul>
+
+<h3>Rotas Obrigatórias da API:</h3>
+<ol>
+  <li><strong>GET /api/produtos:</strong> Retorna todos os produtos ativos (<code>WHERE ativo = TRUE</code>) ordenados pelo ID decrescente.</li>
+  <li><strong>POST /api/produtos:</strong> Cadastra um novo produto (valida campos obrigatórios: <code>nome</code>, <code>quantidade</code> e <code>preco</code>).</li>
+  <li><strong>PUT /api/produtos/:id:</strong> Atualiza os dados de um produto existente.</li>
+  <li><strong>PATCH /api/produtos/:id/desativar:</strong> Realiza a exclusão lógica (Soft Delete), alterando o campo <code>ativo</code> para <code>FALSE</code> sem remover a linha do banco.</li>
+</ol>
+
+<hr>
+
+<h2>5. Especificação do Frontend (HTML, CSS e app.js)</h2>
+<p>Organize a pasta <code>frontend/</code> com:</p>
+<ul>
+  <li><code>index.html</code>: Interface contendo o formulário dinâmico, tabela de listagem e a importação do Axios via CDN.</li>
+  <li><code>style.css</code>: Estilização visual dos formulários, botões e tabela de registros.</li>
+  <li><code>app.js</code>: Arquivo de regras contendo a instância do Axios (<code>baseURL: 'http://localhost:3000/api'</code>) e as funções assíncronas de comunicação com a API.</li>
+</ul>
+
+<hr>
+
+<h2>6. Roteiro de Execução Passo a Passo</h2>
+<ol>
+  <li><strong>Banco de Dados:</strong> Abra o MySQL Workbench e execute o script SQL para criar o schema e a tabela.</li>
+  <li><strong>Ambiente Backend:</strong> Inicie o projeto com <code>npm init -</code>, instale os pacotes <code>express</code>, <code>cors</code>, <code>mysql2</code> e <code>dotenv</code>.</li>
+  <li><strong>Implementação Backend:</strong> Configure as variáveis no <code>.env</code>, estabeleça a conexão no <code>db.js</code> e codifique as quatro rotas no <code>server.js</code>.</li>
+  <li><strong>Implementação Frontend:</strong> Construa a interface HTML e programe no <code>app.js</code> as chamadas de listar, cadastrar, editar e desativar produtos.</li>
+  <li><strong>Validação e Testes:</strong> Cadastre produtos de exemplo, atualize quantidade/preço, desative um produto e verifique a persistência dos dados no MySQL Workbench.</li>
+</ol>
+
+</body>
+</html>
