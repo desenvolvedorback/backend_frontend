@@ -89,7 +89,7 @@ DB_USER=seu_usuario
 DB_PASSWORD=sua_senha
 DB_NAME=nome_do_banco
 DB_PORT=3306
-PORT=3000
+PORT=3004
 
 Substitua os valores de exemplo pelos dados corretos do seu ambiente. Não compartilhe nem envie o arquivo .env ao GitHub.
 
@@ -103,12 +103,12 @@ Ainda na pasta backend, execute:
 
 npm start
 
-O servidor deverá informar que está rodando em http://localhost:3000. Se houver erro de conexão com o banco, confira as variáveis do .env, o serviço MySQL e a existência do banco e da tabela.
+O servidor deverá informar que está rodando em http://localhost:3004. Se houver erro de conexão com o banco, confira as variáveis do .env, o serviço MySQL e a existência do banco e da tabela.
 
 Passo 5 — Abrir o frontend:
 Abra o arquivo frontend/index.html no navegador. Para um ambiente de desenvolvimento mais próximo de uma aplicação real, também é possível servir a pasta frontend com uma extensão de servidor local, como Live Server, no VS Code.
 
-O frontend está configurado para acessar a API em http://localhost:3000/api. Se o backend estiver em outra URL ou porta, atualize a propriedade baseURL no arquivo frontend/app.js.
+O frontend está configurado para acessar a API em http://localhost:3004/api. Se o backend estiver em outra URL ou porta, atualize a propriedade baseURL no arquivo frontend/app.js.
 
 7. VALIDAÇÕES E RESPOSTAS
 
