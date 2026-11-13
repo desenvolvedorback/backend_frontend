@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Vendas - Entrada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Mesma paleta e variáveis da Página de Perfil */
+        :root {
+            --primary-color: #46e5dd;
+            --primary-hover: #38b9ca;
+            --secondary-color: #10b981;
+            --secondary-hover: #059669;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --info-bg: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho Superior */
+        .topbar {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand span {
+            color: var(--secondary-color);
+        }
+
+        /* Navegação */
+        .nav {
+            display: flex;
+            gap: 8px;
+            background-color: var(--info-bg);
+            padding: 5px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: var(--text-main);
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Perfil resumido no topo */
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 999px;
+            background-color: var(--info-bg);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .user-badge:hover {
+            border-color: var(--primary-color);
+        }
+
+        .user-badge img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-badge span {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Conteúdo Principal */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 32px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Banner de Boas-vindas */
+        .welcome-banner {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px 32px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .welcome-text h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .welcome-text h1 span {
+            color: var(--secondary-color);
+        }
+
+        .welcome-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .btn-nova-venda {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-nova-venda:hover {
+            background-color: var(--secondary-hover);
+        }
+
+        /* Grid de Métricas de Vendas */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .metric-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .metric-card .trend {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        /* Ações Rápidas */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .action-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .action-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra Superior -->
+    <header class="topbar">
+        <div class="brand">Sistema<span>Vendas</span></div>
+
+        <nav class="nav">
+            <a href="#" class="active">Dashboard</a>
+            <a href="../../cadastro_produto/frontend/index.html">Produtos</a>
+            <a href="../../cadastro_produto/frontend/fornecedores.html">Fornecedores</a>
+            <!-- Ajuste o caminho abaixo para o nome exato do seu arquivo de perfil -->
+            <a href="index.html">Meu Perfil</a>
+        </nav>
+
+        <a href="index.html" class="user-badge" title="Editar Perfil">
+            <img id="headerFoto" src="https://via.placeholder.com/150?text=User" alt="Foto do usuário">
+            <span id="headerNomeUsuario">@usuario</span>
+        </a>
+    </header>
+
+    <!-- Conteúdo do Dashboard -->
+    <main class="container">
+        
+        <!-- Saudação Dinâmica -->
+        <section class="welcome-banner">
+            <div class="welcome-text">
+                <h1>Bem-vindo, <span id="nomeCompletoUsuario">@usuario</span> ao Dashboard!</h1>
+                <p>Acompanhe o desempenho das suas vendas e acesse seus cadastros rapidamente.</p>
+            </div>
+            <a href="#" class="btn-nova-venda">+ Registrar Nova Venda</a>
+        </section>
+
+        <!-- Resumo de Vendas -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <span class="label">Vendas Hoje</span>
+                <span class="value" id="vendasHoje">R$ 0,00</span>
+                <span class="trend">Atualizado em tempo real</span>
+            </div>
+            <div class="metric-card">
+                <span class="label">Faturamento Mensal</span>
+                <span class="value" id="faturamentoMes">R$ 0,00</span>
+                <span class="trend">+12% em relação ao mês anterior</span>
+            </div>
+            <div class="metric-card">
+                <span class="label">Pedidos Realizados</span>
+                <span class="value" id="totalPedidos">0</span>
+                <span class="trend">Ticket médio estável</span>
+            </div>
+        </section>
+
+        <!-- Atalhos do Sistema -->
+        <section>
+            <h2 class="section-title">Acesso Rápido</h2>
+            <div class="actions-grid">
+                <a href="../../cadastro_produto/frontend/index.html" class="action-card">
+                    <h3>Produtos</h3>
+                    <p>Gerencie o catálogo, preços e estoque dos itens à venda.</p>
+                </a>
+                <a href="../../cadastro_produto/frontend/fornecedores.html" class="action-card">
+                    <h3>Fornecedores</h3>
+                    <p>Consulte e cadastre parceiros e distribuidores.</p>
+                </a>
+                <a href="index.html" class="action-card">
+                    <h3>Configurações de Perfil</h3>
+                    <p>Atualize seu nome, sobrenome e foto de exibição.</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Axios e Script para puxar os dados do usuário -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Exemplo de como preencher os dados do usuário assim que a página carregar
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Substitua pela mesma URL da API que você usa no seu 'perfil.js'
+                // const response = await axios.get('http://localhost:3000/api/perfil', { headers: ... });
+                // const usuario = response.data;
+
+                // Exemplo simulado (remova ao conectar sua API real):
+                const usuario = {
+                    nome: localStorage.getItem('nome') || 'Usuário',
+                    sobrenome: localStorage.getItem('sobrenome') || '',
+                    foto: localStorage.getItem('foto') || 'https://via.placeholder.com/150?text=User'
+                };
+
+                const nomeExibicao = `${usuario.nome} ${usuario.sobrenome}`.trim();
+
+                document.getElementById('nomeCompletoUsuario').textContent = nomeExibicao;
+                document.getElementById('headerNomeUsuario').textContent = usuario.nome;
+                if (usuario.foto) {
+                    document.getElementById('headerFoto').src = usuario.foto;
+                }
+            } catch (erro) {
+                console.error('Erro ao carregar dados do usuário no dashboard:', erro);
+            }
+        });
+    </script>
+</body>
+</html>

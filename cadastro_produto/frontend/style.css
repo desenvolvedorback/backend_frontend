@@ -12,6 +12,18 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
+.container a {
+  text-decoration: none;
+  background-color: #0066cc;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.container a:hover {
+  background-color: #004c99;
+}
 
 h1, h2 { margin-top: 0; }
 
